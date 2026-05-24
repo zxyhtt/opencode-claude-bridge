@@ -16,10 +16,11 @@ exists. The slim plugin's `task` tool registers more roles, but the bridge
 never told Claude about them.
 
 **What the patch does:** at module load, the bridge reads
-`~/.config/opencode/oh-my-opencode-slim.json`, finds the active preset, and
-injects each non-orchestrator role into the Agent-tool description with its
-model binding. Inbound tool-arg translation already passes unknown
-`subagent_type` values through unchanged, so no other change is needed.
+the slim config file (respects `OPENCODE_CONFIG_DIR` environment variable,
+falls back to `~/.config/opencode`), finds the active preset, and injects
+each non-orchestrator role into the Agent-tool description with its model
+binding. Inbound tool-arg translation already passes unknown `subagent_type`
+values through unchanged, so no other change is needed.
 
 **Fallback:** if the slim config is absent or malformed, the description
 falls back to the original (four built-ins only). Upstream behavior preserved.

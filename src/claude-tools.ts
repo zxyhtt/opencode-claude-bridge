@@ -364,10 +364,12 @@ export function translateArgsOpencodeToClaude(
  */
 function readSlimSubagentRoles(): string {
   try {
-    const configPath = join(
-      homedir(),
-      ".config/opencode/oh-my-opencode-slim.json",
-    );
+    // Respect OPENCODE_CONFIG_DIR environment variable
+    const configDir = process.env.OPENCODE_CONFIG_DIR
+      ? process.env.OPENCODE_CONFIG_DIR
+      : join(homedir(), ".config/opencode");
+    
+    const configPath = join(configDir, "oh-my-opencode-slim.json");
     if (!existsSync(configPath)) return "";
     const raw = readFileSync(configPath, "utf8");
     const config = JSON.parse(raw) as {
