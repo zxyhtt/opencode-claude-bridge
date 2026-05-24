@@ -13,7 +13,8 @@
     "prepublishOnly": "npm run build",
     "typecheck": "tsc --noEmit",
     "test": "npm run build && node --test dist/index.test.js",
-    "validate:oauth": "npm run build && node scripts/validate-opencode-oauth.js"
+    "validate:oauth": "npm run build && node scripts/validate-opencode-oauth.js",
+    "postinstall": "npm run build"
   },
   "keywords": [
     "opencode",
